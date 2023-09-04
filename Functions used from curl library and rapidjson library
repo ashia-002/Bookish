@@ -1,0 +1,46 @@
+Functions from the `rapidjson` Library:
+
+1. **`Document::Parse(const char* json)`**:
+   - Use: This function is used to parse a JSON string and populate a `rapidjson::Document` object with the parsed data.
+   - Description: It takes a JSON string as input and parses it, creating a structured representation of the JSON data that can be 
+   easily accessed.
+
+2. **`Document::HasMember(const char* memberName)`**:
+   - Use: This function is used to check if a JSON object has a member with the given name.
+   - Description: It returns `true` if the JSON object has a member with the specified name and `false` otherwise.
+
+3. **`Value::IsArray()`** and **`Value::IsString()`**:
+   - Use: These functions are used to check the type of a JSON value.
+   - Description: `Value::IsArray()` checks if a JSON value is an array, and `Value::IsString()` checks if it's a string. These checks are  
+   used to ensure that the JSON data is of the expected type before accessing it.
+
+4. **`Value::GetString()`**, **`Value::GetInt()`**:
+   - Use: These functions are used to retrieve the values of JSON members of specific types (string or integer).
+   - Description: `Value::GetString()` retrieves the string value of a JSON member, and `Value::GetInt()` retrieves the integer value.
+
+Functions from the `curl` Library:
+
+1. **`curl_easy_init()`**:
+   - Use: This function is used to initialize a libcurl easy handle, which is used to make HTTP requests.
+   - Description: It sets up the libcurl environment and prepares it for making HTTP requests.
+
+2. **`curl_easy_setopt(CURL* handle, CURLoption option, parameter)`**:
+   - Use: This function is used to set various options for the libcurl handle, such as the URL to request, callback functions, and more.
+   - Description: It configures the behavior of the libcurl handle, allowing you to customize how the HTTP request is made.
+
+3. **`curl_easy_perform(CURL* handle)`**:
+   - Use: This function is used to perform the HTTP request with the configured libcurl handle.
+   - Description: It initiates the HTTP request, sends it to the specified URL, and receives the response. The response data is stored 
+   using the callback function provided.
+
+4. **`curl_easy_cleanup(CURL* handle)`**:
+   - Use: This function is used to clean up and release resources associated with the libcurl handle when you're done with it.
+   - Description: It frees memory and resources used by the libcurl handle, ensuring proper cleanup.
+
+5. **`size_t WriteCallback(void* contents, size_t size, size_t nmemb, string* output)`**:
+   - Use: This is a custom callback function provided to libcurl. It is called when libcurl receives data from the HTTP response, and it's 
+   used to store the received data in a string.
+   - Description: The function appends the received data to the `string* output`, and its return value indicates how much data was processed.
+
+These functions collectively allow the code to make an HTTP request to the Google Books API using libcurl, receive the JSON response, and then parse 
+and extract information from the JSON response using the `rapidjson` library.*/
