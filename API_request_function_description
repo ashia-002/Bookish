@@ -1,0 +1,42 @@
+Function to make API RESPONSE
+
+CURL* curl = curl_easy_init();: This line initializes a libcurl easy handle (CURL*) using curl_easy_init(). 
+This handle will be used to configure and execute the HTTP request.
+
+if (curl) { ... }: 
+This conditional statement checks whether the libcurl handle was successfully initialized. 
+If curl is not nullptr, it means the initialization was successful, and the code inside the block will execute.
+
+string response;:
+This line declares a string variable named response, which will be used to store the response data
+received from the API.
+
+curl_easy_setopt(curl, CURLOPT_URL, url.c_str());: 
+Here, we set the URL for the HTTP request using curl_easy_setopt. 
+The url parameter passed to the function is the API endpoint we want to request.
+
+curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);: 
+This line sets the callback function WriteCallback to handle the data received from the API 
+response. The function will be responsible for writing the received data into the response string.
+
+curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response);: 
+This line sets the user-defined pointer to the response string. It tells libcurl where to store the received data.
+
+CURLcode res = curl_easy_perform(curl);: 
+This line executes the HTTP request using curl_easy_perform. It performs the request and stores
+the result (success or failure) in the res variable.
+
+if (res == CURLE_OK) { ... } else { ... }: 
+Here, we check the result of the request. If res is equal to CURLE_OK, 
+it means the request was successful, and the code inside the first block will execute. 
+Otherwise, if there was an error, the code inside the else block will execute.
+
+In case of success, the libcurl handle is cleaned up using curl_easy_cleanup(curl);, 
+and the response data stored in the response string is returned.
+
+In case of an error, the libcurl handle is still cleaned up, 
+but an empty string is returned to indicate that an error occurred.
+
+The function effectively sends an HTTP request to the specified URL, 
+receives the API's response, and returns that response as a string. The API response 
+typically contains data in JSON format, which can be parsed to extract the desired information.*/
