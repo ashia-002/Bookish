@@ -1,0 +1,29 @@
+two different components are involved in storing data received from the API:
+
+WriteCallback Function:
+size_t WriteCallback(void *contents, size_t size, size_t nmemb, string *output)
+{
+    size_t totalSize = size * nmemb;
+    output->append(static_cast<char *>(contents), totalSize);
+    return totalSize;
+}
+This function, WriteCallback, is a custom callback function that you provide to the libcurl library. Its purpose is to handle the data received from the API during an HTTP request. 
+Here's how it works:
+
+When libcurl makes an HTTP request and receives data from the API, it calls this callback function.
+The data received from the API is passed to this function in the contents parameter.
+The function appends this data to the string* output that is provided as a parameter. This is how it accumulates the data received from the API over multiple calls.
+It calculates and returns the totalSize, which is the size (in bytes) of the data received in this specific callback.
+Setting CURLOPT_WRITEDATA Option:
+
+
+curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response);
+This line of code configures the libcurl easy handle (curl) to use the response string as the destination for the data received from the API. Here's how it works:
+
+CURLOPT_WRITEDATA is an option that you set on the libcurl handle (curl).
+You specify &response as the value of this option, which means that libcurl will direct the data it receives from the API into the response string.
+So, to sum it up:
+
+The WriteCallback function is responsible for handling the data received in individual chunks from the API and appending it to the response string.
+The curl_easy_setopt line configures libcurl to use the response string as the destination for the data, so that when the HTTP request is complete, the response string contains the entire data received from the API.
+Essentially, the WriteCallback function and the CURLOPT_WRITEDATA option work together to store the data received from the API into the response string.
